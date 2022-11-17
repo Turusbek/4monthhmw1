@@ -21,6 +21,7 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
                         id, binding.etTitle.text.toString(), binding.etDes.text.toString()
                     )
                 )
+
                 controller.navigateUp()
             }
         } else {

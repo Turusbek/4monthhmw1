@@ -17,7 +17,7 @@ class NoteFragment :
     override fun setupUI() {
         adapter = NoteAdapter(this)
         binding.rvNote.adapter = adapter
-        adapter.addNote(App.db.getDao().getAllNote())
+        adapter.addNote(App.db.getDao().getAllNote()as ArrayList<NoteModel>)
     }
     override fun setupObserver() {
         super.setupObserver()
@@ -49,6 +49,7 @@ class NoteFragment :
                     }
                     .setPositiveButton("Да") { _: DialogInterface?, _: Int ->
                         adapter.deleteNote(viewHolder.adapterPosition)
+                        adapter.notifyItemChanged(viewHolder.adapterPosition)
                     }
                     .show()
             }

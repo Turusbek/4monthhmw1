@@ -23,7 +23,7 @@
         android:id="@+id/tvBoardTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/Title"
         android:textColor="@color/black"
         android:textSize="24sp" />
 
@@ -31,14 +31,14 @@
         android:id="@+id/tvBoardDes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="@string/Des"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnBoardStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start" />
+        android:text="@string/start" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,17 +10,17 @@ import com.example.a4monthhmw1.ui.App
 
 class NoteAdapter(private val noteClikInterfase: NoteClicInterfase) :
     RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
-    private var list: List<NoteModel> = arrayListOf()
+    private var list: ArrayList<NoteModel> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addNote(list: List<NoteModel>) {
+    fun addNote(list: ArrayList<NoteModel>) {
         this.list = list
         notifyDataSetChanged()
     }
 
 
     fun deleteNote(position: Int) {
-        App.db.getDao().deleteNote(list[position])
+        App.db.getDao().deleteNote(list.removeAt(position))
         notifyItemChanged(position)
     }
 

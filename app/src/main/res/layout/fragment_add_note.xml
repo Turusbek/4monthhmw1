@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:hint="Title"
+        android:hint="@string/Title"
         android:minHeight="48dp" />
 
     <EditText
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Description"
+        android:hint="@string/Des"
         android:minHeight="48dp" />
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="46dp"
-        android:text="save"
+        android:text="@string/save"
         android:textSize="20sp" />
 
 </LinearLayout>

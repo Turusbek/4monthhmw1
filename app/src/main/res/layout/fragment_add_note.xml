@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@color/orange2"
     android:orientation="vertical"
     tools:context=".ui.fragment.addNote.AddNoteFragment">
 
@@ -26,6 +27,7 @@
     <Button
         android:id="@+id/btnSaveNote"
         android:layout_width="wrap_content"
+        android:backgroundTint="@color/orange3"
         android:layout_height="wrap_content"
         android:paddingHorizontal="46dp"
         android:text="@string/save"

@@ -1,57 +1,93 @@
 package com.example.a4monthhmw1.ui.fragment.contact
 
-import android.R
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.ContactsContract
-import android.widget.SimpleCursorAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.a4monthhmw1.base.BaseFragment
 import com.example.a4monthhmw1.databinding.FragmentContactBinding
+import com.example.a4monthhmw1.model.ContactModel
 
-class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBinding::inflate){
-    var cols = listOf(
-        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-        ContactsContract.CommonDataKinds.Phone.NUMBER,
-        ContactsContract.CommonDataKinds.Phone._ID,
-    ).toTypedArray()
+class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBinding::inflate)
+    ,ContactAdapter.ShareListener {
+    private lateinit var adapter: ContactAdapter
+
     override fun setupUI() {
+        adapter = ContactAdapter(this)
+        binding.rvContact.adapter = adapter
 
-
-        if (ActivityCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_CONTACTS)
-            != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(requireActivity(), Array(1){android.Manifest.permission
-                .READ_CONTACTS},111)
-        }
-        else
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_CONTACTS
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(requireActivity(), Array(1) {
+                android.Manifest.permission
+                    .READ_CONTACTS
+            }, 111)
+        } else
             readContact()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode==111 && grantResults[0]== PackageManager.PERMISSION_GRANTED)
-            readContact()
-    }
+    @SuppressLint("Range")
     private fun readContact() {
+        val list = arrayListOf<ContactModel>()
 
-        val from = listOf( ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.NUMBER,)
+        val contentResolver = requireActivity().contentResolver
+        val cursor = contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            null,
+            null,
+            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+        )
+        if (cursor?.count!! > 0) {
+            while (cursor.moveToNext())
 
-        val to = intArrayOf(R.id.text1, R.id.text2)
+                if (Integer.parseInt
+                        (
+                        cursor.getString
+                            (
+                            cursor.getColumnIndex
+                                (ContactsContract.Contacts.HAS_PHONE_NUMBER)
+                        )
+                    ) > 0
+                ) {
 
-        val rs = requireContext().contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            cols,null,null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
 
-        val adapter = SimpleCursorAdapter(requireContext(), R.layout.simple_list_item_2
-            ,rs, from.toTypedArray(),to,0)
+                    val phoneCursor = contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?",
+                        arrayOf(id), null
+                    )
+                    if (phoneCursor?.moveToNext()!!) {
+                        val phoneNumber = phoneCursor.getString(
+                            phoneCursor.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER
+                            )
+                        )
+                        phoneCursor.close()
+                        list.add(ContactModel(name, phoneNumber))
+                    }
+                    phoneCursor.close()
 
-       binding.listView.adapter = adapter
-
+                }
+        }
+        cursor.close()
+        adapter.setList(list)
 
     }
 
+    override fun share() {
+        Toast.makeText(context,"Upps",Toast.LENGTH_SHORT).show()
+
+    }
 }
+

@@ -16,6 +16,7 @@
     <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
         android:id="@+id/boardTab"
         android:layout_width="wrap_content"
+        app:dotsSpacing="4dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

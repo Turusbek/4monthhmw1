@@ -11,7 +11,7 @@ class BoardAdapter(private val listener: StartListener) :
     RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
     val titleList = listOf("Заметки", "Контакты", "Конец")
     val detList = listOf("Добавить", "Доступ", "Конец")
-    val list = listOf(R.drawable.img, R.drawable.image, R.drawable.img_1)
+    val list = listOf(R.drawable.fon1, R.drawable.fon2, R.drawable.fon3)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
         val binding =
             BoardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

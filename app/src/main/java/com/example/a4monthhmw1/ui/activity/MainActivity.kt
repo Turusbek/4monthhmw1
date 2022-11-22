@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.noteFragment,
-                R.id.contactFragment
+                R.id.contactFragment,
+                R.id.profileFragment
             )
         )
         setupActionBarWithNavController(controller,appBarConfiguration)
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             val list: ArrayList<Int> = arrayListOf()
             list.add(R.id.contactFragment)
             list.add(R.id.noteFragment)
+            list.add(R.id.profileFragment)
             if (list.contains(destination.id)){
                 binding.bottomNav.isVisible = true
             }else{

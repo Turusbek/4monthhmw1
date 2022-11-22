@@ -1,18 +1,19 @@
 package com.example.a4monthhmw1.ui.fragment.contact
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.provider.ContactsContract
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.a4monthhmw1.base.BaseFragment
 import com.example.a4monthhmw1.databinding.FragmentContactBinding
 import com.example.a4monthhmw1.model.ContactModel
 
-class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBinding::inflate)
-    ,ContactAdapter.ShareListener {
+class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBinding::inflate),
+    ContactAdapter.ShareListener {
     private lateinit var adapter: ContactAdapter
 
     override fun setupUI() {
@@ -85,9 +86,29 @@ class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBind
 
     }
 
-    override fun share() {
-        Toast.makeText(context,"Upps",Toast.LENGTH_SHORT).show()
-
+    override fun share(number: String, shareSwitch: Boolean) {
+        if (shareSwitch) {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Перейти на номер $number?")
+                .setNegativeButton("Нет", null)
+                .setPositiveButton("Да") { _: DialogInterface?, _: Int ->
+                    val url = "https://api.whatsapp.com/send?phone=$number"
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(url)
+                    requireActivity().startActivity(intent)
+                }.show()
+        } else {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Перейти на номер $number?")
+                .setNegativeButton("Нет", null)
+                .setPositiveButton("Да") { _: DialogInterface?, _: Int ->
+                    val intent =
+                        Intent(
+                            Intent.ACTION_VIEW, Uri.fromParts("tel", number, number)
+                        )
+                    requireActivity().startActivity(intent)
+                }.show()
+        }
     }
 }
 

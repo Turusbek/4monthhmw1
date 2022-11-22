@@ -7,4 +7,9 @@
     <item android:id="@+id/contactFragment"
         android:title="@string/con"
         android:icon="@drawable/ic_baseline_person_24"/>
+
+  <item android:id="@+id/profileFragment"
+    android:title="@string/pro"
+    android:icon="@drawable/ic_baseline_person_outline_24"/>
+
 </menu>

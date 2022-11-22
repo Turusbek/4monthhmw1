@@ -72,6 +72,7 @@ class OnBoardFragment : BaseFragment<FragmentOnBoardBinding>(FragmentOnBoardBind
         signIn()
 
     }
+
     companion object{
         private const val RC_SIGN_IN = 9001
     }

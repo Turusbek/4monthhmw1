@@ -15,9 +15,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imBoardItem"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         android:layout_height="350dp"/>
 
     <TextView

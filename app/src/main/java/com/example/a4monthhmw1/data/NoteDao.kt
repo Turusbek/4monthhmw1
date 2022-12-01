@@ -17,4 +17,5 @@ interface NoteDao {
 
     @Update
      fun updateNote(model: NoteModel)
+
 }

@@ -11,7 +11,7 @@ class BoardAdapter(private val listener: StartListener) :
     RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
     val titleList = listOf("Заметки", "Контакты", "Конец")
     val detList = listOf("Добавить", "Доступ", "Конец")
-    val list = listOf(R.drawable.fon1, R.drawable.fon2, R.drawable.fon3)
+    val list = listOf(R.raw.work_flow_json, R.raw.note_json, R.raw.notes_document)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
         val binding =
             BoardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,7 +31,7 @@ class BoardAdapter(private val listener: StartListener) :
     inner class BoardViewHolder(val binding: BoardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(position: Int) {
-            binding.imBoardItem.setBackgroundResource(list[position])
+            binding.imBoardItem.setAnimation(list[position])
             binding.tvBoardTitle.text = titleList[position]
             binding.tvBoardDes.text = detList[position]
             if (position == 2) {

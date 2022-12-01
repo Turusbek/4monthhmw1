@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.a4monthhmw1.model.NoteModel
 
-@Database(entities = [NoteModel::class], version = 1)
+@Database(entities = [NoteModel::class], version = 2, exportSchema = true)
 abstract class NoteDatabase : RoomDatabase() {
     abstract fun getDao(): NoteDao
 
@@ -20,7 +20,7 @@ abstract class NoteDatabase : RoomDatabase() {
                 NoteDatabase::class.java,
                 "DB NAME"
             ).allowMainThreadQueries()
-                .build()
+                .fallbackToDestructiveMigration().allowMainThreadQueries().build()
 
             return INSTANCE
         }

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a4monthhmw1.databinding.ItemNoteBinding
 import com.example.a4monthhmw1.model.NoteModel
 import com.example.a4monthhmw1.ui.App
+import java.text.SimpleDateFormat
+import java.util.logging.SimpleFormatter
 
 class NoteAdapter(private val noteClikInterfase: NoteClicInterfase) :
     RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
@@ -43,12 +45,13 @@ class NoteAdapter(private val noteClikInterfase: NoteClicInterfase) :
     override fun getItemCount(): Int = list.size
     
 
-    class NoteViewHolder(val binding: ItemNoteBinding) :
+    class NoteViewHolder(val binding : ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(model: NoteModel) {
             binding.itemTvTitle.text = model.title
             binding.itemTvDes.text = model.description
+            binding.itemTvDate.text = model.date
         }
     }
 

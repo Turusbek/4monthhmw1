@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:background="@color/orange2"
     android:orientation="vertical"
@@ -15,6 +16,9 @@
         android:layout_marginHorizontal="16dp"
         android:hint="@string/Title"
         android:minHeight="48dp" />
+
+
+
 
     <EditText
         android:id="@+id/etDes"
